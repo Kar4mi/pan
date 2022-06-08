@@ -1,17 +1,16 @@
-let izq = 0
-let der = 0
+let sensor = 0
 basic.forever(function () {
-    maqueen.motorRun(maqueen.Motors.All, maqueen.Dir.CW, 25)
-    izq = maqueen.readPatrol(maqueen.Patrol.PatrolLeft)
-    der = maqueen.readPatrol(maqueen.Patrol.PatrolRight)
-    if (izq) {
-        maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 137)
-        maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 14)
-        basic.pause(50)
+    sensor = maqueen.Ultrasonic(PingUnit.Centimeters)
+    if (sensor < 10) {
+        basic.showLeds(`
+            # . # # .
+            # # # . #
+            . # # . #
+            # . # # #
+            . . . . .
+            `)
     }
-    if (der) {
-        maqueen.motorRun(maqueen.Motors.M2, maqueen.Dir.CW, 137)
-        maqueen.motorRun(maqueen.Motors.M1, maqueen.Dir.CW, 14)
-        basic.pause(50)
-    }
+})
+basic.forever(function () {
+	
 })
